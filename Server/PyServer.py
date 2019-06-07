@@ -2,6 +2,7 @@
 from Common.NetStreamServer import NetStreamServer
 import Queue
 
+
 class PyServer(object):
 	__instance = None
 	@classmethod
@@ -21,10 +22,8 @@ class PyServer(object):
 	def start(self):
 		self.server.start()
 		while self.start():
-
+			pass
 
 	def deal_data(self, data):
 		self.message_queue.push(data)
-
-
 
