@@ -1,0 +1,1 @@
+{"remote_debug_port": 22346, "remote_debug_ip": "127.0.0.1", "encryption": "None", "game_port": 12345, "telnet_port": 32346, "tick_interval": 0.033, "game_ip": "127.0.0.1", "compression": "None"}

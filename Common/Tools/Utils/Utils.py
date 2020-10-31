@@ -8,16 +8,6 @@
 import unittest
 
 
-class SingleTonAbandond(object):
-    _instance = {}
-
-    def __new__(cls):
-        cls_name = cls.__name__
-        cls._instance[cls_name] = cls._instance[cls_name] if cls_name in cls._instance \
-            else super(SingleTonAbandond, cls).__new__(cls)
-        return cls._instance[cls_name]
-
-
 class SingleTonMetaClass(type):
     _instance = {}
 
