@@ -34,7 +34,7 @@ class TcpClient(object):
         try:
             if self.socket:
                 self.logger.info("send: {}".format(message))
-                self.socket.send(message)
+                self.socket.send(message.encode("gb2312"))
         except socket.error as e:
             self.logger.info(e)
             self.close()
@@ -42,7 +42,7 @@ class TcpClient(object):
     def receive(self):
         try:
             while self.socket:
-                data = self.socket.recv(Const.socket_const_bytes)
+                data = self.socket.recv(Const.socket_const_bytes).decode("utf-8")
                 self.logger.info("receive: {}".format(data))
                 if not data:
                     self.close()

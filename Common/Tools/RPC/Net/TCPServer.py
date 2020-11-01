@@ -38,7 +38,7 @@ class TcpServerGeventBased(object):
         try:
             can_receive = True
             while can_receive:
-                data = conn.recv(Const.socket_const_bytes)
+                data = conn.recv(Const.socket_const_bytes).decode("utf-8")
                 self.logger.info("receive: {}".format(data))
                 if not data:
                     can_receive = False
@@ -54,7 +54,7 @@ class TcpServerGeventBased(object):
 
     def write(self, conn, message):
         try:
-            conn.send(message)
+            conn.send(message.encode("gb2312"))
         except Exception as e:
             self.closeConnection(conn)
             self.logger.info(e)
@@ -62,8 +62,8 @@ class TcpServerGeventBased(object):
     def closeConnection(self, conn):
         try:
             self.logger.info("stop connection {}".format(conn))
-            conn.isConnected() and conn.shutdown(socket.SHUT_WR)
-            not conn.isClosed() and conn.close()
+            conn.shutdown(socket.SHUT_WR)
+            conn.close()
         except Exception as e:
             self.logger.info(e)
         if conn in self.conns:

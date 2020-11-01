@@ -39,7 +39,7 @@ class TimerUnit(object):
 
 class TimerSchedule(Singleton):
     # 该方案比时间轮方式消耗大很多，好处是易于理解实现, 不保证线程安全
-    def __init__(self ):
+    def __init__(self):
         # 时间最小步长
         super(TimerSchedule, self).__init__()
         self.time_step = Const.time_step  # 每秒30帧
@@ -123,11 +123,11 @@ class UnitTest(unittest.TestCase):
             print(p)
             if p != 10:
                 return
-            for i in xrange(50):
+            for i in range(50):
                 a.delTimer(test_list[i * 2])
 
         test_list = []
-        for i in xrange(100):
+        for i in range(100):
             test_list.append(a.addTimer(2 + i * 0.2, funcD, i))
 
         while a.now_time < start + 100.0:

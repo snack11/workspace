@@ -58,10 +58,9 @@ class TelnetServer(TcpServerGeventBased):
             ans = eval(data, {"s": self}, locals())
             self.write(conn, "{}\n".format(ans))
         except Exception as e:
-            self.logger.error(e)
-            import sys
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            sys.excepthook(exc_type, exc_value, exc_traceback)
+            import traceback
+            trace = traceback.format_exc()
+            self.logger.error("Traceback: {}, data: {}".format(trace, data))
 
 
 class UnitTest(unittest.TestCase):

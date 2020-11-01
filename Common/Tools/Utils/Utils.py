@@ -21,8 +21,8 @@ class SingleTonMetaClass(type):
         return cls.__instance
 
 
-class Singleton(object):
-    __metaclass__ = SingleTonMetaClass
+class Singleton(metaclass=SingleTonMetaClass):
+    pass
 
 
 class UnitTest(unittest.TestCase):
