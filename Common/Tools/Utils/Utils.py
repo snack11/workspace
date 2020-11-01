@@ -25,6 +25,15 @@ class Singleton(metaclass=SingleTonMetaClass):
     pass
 
 
+def getLocalIP():
+    import requests
+
+    html_text = requests.get("http://ip.3322.net").text
+    if html_text:
+        return html_text.rstrip('\n')
+    return False
+
+
 class UnitTest(unittest.TestCase):
     def testSingleTon(self):
         a = Singleton()
@@ -54,5 +63,5 @@ class UnitTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
-
+    # unittest.main()
+    getLocalIP()

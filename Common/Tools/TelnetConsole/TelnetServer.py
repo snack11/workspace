@@ -31,29 +31,48 @@ class TelnetServer(TcpServerGeventBased):
 
     def DealConnData(self, conn, data):
         # 取完整数据
-        historyData = self.con2data.get(conn, "")
-        if data == "\r\n":
-            self.DoDealConnDat(conn, historyData)
-            self.con2data.pop(conn, None)
-        elif data.endswith("\n"):
-            self.DoDealConnDat(conn, data)
-            self.con2data.pop(conn, None)
-        else:
-            self.con2data[conn] = historyData + data
+        try:
+            historyData = self.con2data.get(conn, "")
+            if data == "\r\n":
+                self.DoDealConnDat(conn, historyData)
+                self.con2data.pop(conn, None)
+            elif data.endswith("\n"):
+                self.DoDealConnDat(conn, data)
+                self.con2data.pop(conn, None)
+            else:
+                self.con2data[conn] = historyData + data
+        except Exception as e:
+            self.logger.error(e)
+            import sys
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            sys.excepthook(exc_type, exc_value, exc_traceback)
+
+    def BrainAns(self, conn, data):
+        if data == '\r\n':
+            pass
+        if data.startswith('ip'):
+            from Common.Tools.Utils.Utils import getLocalIP
+            IPAdress = getLocalIP()
+            self.write(conn, "\r\n{}\r\n".format(IPAdress))
+
+
+        else:   self.EvalConnData(conn, data)
 
     def DoDealConnDat(self, conn, data):
         # 是否登录
         stat = self.con2stat.get(conn, False)
         if stat:
-            self.EvalConnData(conn, data)
+            self.BrainAns(conn, data)
         else:
             if self.loginConFirm(data):
                 self.con2stat[conn] = True
+                self.write(conn, "{}\r\n".format("welcome"))
             else:
-                self.write(conn, "{}\n".format("user passwd"))
+                self.write(conn, "\r\n{}\r\n".format("user passwd"))
 
     def EvalConnData(self, conn, data):
         try:
+
             comp = compile(data, "telnet_command", "single")
             ans = eval(data, {"s": self}, locals())
             self.write(conn, "{}\n".format(ans))
