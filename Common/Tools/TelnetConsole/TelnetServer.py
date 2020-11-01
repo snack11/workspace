@@ -9,7 +9,8 @@ from Common.Tools.RPC.Net.TCPServer import TcpServerGeventBased
 from Common.Tools.Timer.Timer import TimerSchedule
 from Common.Const import LoginState
 
-userDict = {'whathappen':'asdasd'}
+userDict = {'whathappen': 'asdasd'}
+
 
 class TelnetServer(TcpServerGeventBased):
     def loginConFirm(self, data_):

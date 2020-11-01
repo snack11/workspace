@@ -102,25 +102,25 @@ class UnitTest(unittest.TestCase):
         start = time.time()
 
         def func():
-            print time.time()
+            print(time.time())
 
         func()
         a.addTimer(0.7, func)
         a.addTimer(1.3, func)
 
         def funcB():
-            print "b", time.time()
+            print("b", time.time())
 
         tid = b.addRepeatTimer(0.2, funcB)
 
         def funcC(tid1):
-            print "cancel b"
+            print("cancel b")
             TimerSchedule().delTimer(tid1)
 
         a.addTimer(1.0, funcC, tid)
 
         def funcD(p):
-            print p
+            print(p)
             if p != 10:
                 return
             for i in xrange(50):

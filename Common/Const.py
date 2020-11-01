@@ -19,6 +19,7 @@ class TimerMode(object):
     TimerCancel = 0x00
     TimerReplace = 0x01
 
+
 class LoginState(object):
     login = 1
     checkout = 0
@@ -31,9 +32,8 @@ NONBLOCKING = (errno.EAGAIN, errno.EWOULDBLOCK)
 socket_const_bytes = 1024
 
 # console 相关
-telnetUrl = "192.168.0.103"
+telnetUrl = "0.0.0.0"
 telnetPort = 22349
-
 
 if __name__ == "__main__":
     pass
