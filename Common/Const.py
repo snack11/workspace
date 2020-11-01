@@ -6,7 +6,9 @@
 import errno
 
 # logging 相关
-logging_path = "/Users/snack/WorkSpace/SpecialCode/LogInfo/log.log"
+logging_path = "\usetobe\practiseSpace\workspace/LogInfo/log.log"
+# logging_path = "\usetobe\practiseSpace\workspace/LogInfo/log.log"
+
 
 # timer 相关
 time_step = 0.033
@@ -17,6 +19,10 @@ class TimerMode(object):
     TimerCancel = 0x00
     TimerReplace = 0x01
 
+class LoginState(object):
+    login = 1
+    checkout = 0
+
 
 # socket相关
 testUrl = "localhost"
@@ -25,8 +31,8 @@ NONBLOCKING = (errno.EAGAIN, errno.EWOULDBLOCK)
 socket_const_bytes = 1024
 
 # console 相关
-telnetUrl = "192.168.0.102"
-telnetPort = 22348
+telnetUrl = "192.168.0.103"
+telnetPort = 22349
 
 
 if __name__ == "__main__":

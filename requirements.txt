@@ -1,4 +1,3 @@
 gevent==1.4.0
 greenlet==0.4.15
-pyev-static==0.9.5
-pyuv==1.4.0
+
